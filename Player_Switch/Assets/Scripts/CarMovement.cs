@@ -22,7 +22,6 @@ public class CarMovement : MonoBehaviour
 
 
     public float Speed;
-    //Player player;
     private void Start()
     {
         //TryGetComponent<Player>(out player);
@@ -79,4 +78,5 @@ public class CarMovement : MonoBehaviour
 
         }
     }
+
 }

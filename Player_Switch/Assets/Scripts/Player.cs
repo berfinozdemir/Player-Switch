@@ -16,18 +16,17 @@ public class Player : MonoBehaviour
     {
         if (other.CompareTag("PlayerSwitchArea"))
         {
-            //other.TryGetComponent<PlayerData>(out PlayerData playerData);
-            //playerController.SwitchPlayer(playerData.playerType);
             var player = other.GetComponentInParent<Player>();
             playerController.SwitchPlayer(player.playerData.playerType);
-
-
+            //player.transform.parent = this.transform;
         }
     }
+    
     public void ActivateMovement()
     {
         isCurrentPlayer = true;
         rb.isKinematic = false;
+        UIManager.Instance.PanelEnabled(playerData.playerType, true);
     }
     public void DeactivateMovement()
     {

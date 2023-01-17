@@ -149,7 +149,11 @@ public class AircraftMovement : MonoBehaviour
     }
     public void Land()
     {
-        transform.DOMove(LandingPosition.position, 1f).SetEase(Ease.Linear).OnComplete(() => { playerController.SwitchPlayer(PlayerType.Aircraft);});
+        //playerController.SwitchPlayer(PlayerType.Aircraft);
+        transform.DOMove(LandingPosition.position, 1f).SetEase(Ease.Linear).OnComplete(() => 
+        { 
+            playerController.SwitchPlayer(PlayerType.Stickman);
+        });
     }
     private void OnDisable()
     {

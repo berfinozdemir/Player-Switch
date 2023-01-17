@@ -56,7 +56,9 @@ public class YachtMovement : MonoBehaviour
     private float rotSpeedY = 1.5f;
     float baseSpeed = 30f;
     Player player;
-    private void Start()
+    public Transform Marina;
+    public PlayerController playerController;
+    private void Awake()
     {
         player = GetComponent<Player>();
     }
@@ -92,5 +94,13 @@ public class YachtMovement : MonoBehaviour
     private void Move(Vector3 move)
     {
         transform.position += move;
+    }
+    public void Land()
+    {
+        //playerController.SwitchPlayer(PlayerType.Aircraft);
+        transform.DOMove(Marina.position, 1f).SetEase(Ease.Linear).OnComplete(() =>
+        {
+            playerController.SwitchPlayer(PlayerType.Stickman);
+        });
     }
 }

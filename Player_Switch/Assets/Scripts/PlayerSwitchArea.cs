@@ -5,4 +5,5 @@ using UnityEngine;
 public class PlayerSwitchArea : MonoBehaviour
 {
     public PlayerData playerData;
+    
 }

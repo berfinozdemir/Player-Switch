@@ -10,7 +10,8 @@ public class PlayerController : MonoBehaviour
     public List<Player> players;
     public Action OnPlayerChange;
     public Transform Stickman;
-    public Transform Aircraft;
+    //public Transform Aircraft;
+    public Transform Marina;
     private void Start()
     {
         if (currentPlayer == PlayerType.Stickman) UIManager.Instance.PanelEnabled(false);
@@ -23,18 +24,35 @@ public class PlayerController : MonoBehaviour
             var player = item.GetComponent<Player>();
             if (item.playerData.playerType == currentPlayer)
             {
+                if (playerType == PlayerType.Yacht)
+                {
+                    Stickman.transform.position = Marina.position;
+                }
+                else
+                {
+                    Stickman.transform.parent = item.transform;
+                    Stickman.transform.position += new Vector3(2, 0, 4);
+
+                }
                 player.ActivateMovement();
                 
+
             }
             else
                 player.DeactivateMovement();
 
             if (playerType != PlayerType.Stickman)
             {
+                
                 Stickman.gameObject.SetActive(false);
-                UIManager.Instance.PanelEnabled(true);
+                UIManager.Instance.PanelEnabled(playerType, true);
+
             }
-            else UIManager.Instance.PanelEnabled(false);
+            else
+            { 
+                UIManager.Instance.PanelEnabled(false);
+                Stickman.gameObject.SetActive(true);
+            }
         }
         OnPlayerChange?.Invoke();
     }
@@ -44,7 +62,15 @@ public class PlayerController : MonoBehaviour
         SwitchPlayer(PlayerType.Stickman);
         Stickman.gameObject.SetActive(true);
         UIManager.Instance.PanelEnabled(false);
+
         
     }
-    
+    public void GetOutYacht()
+    {
+        SwitchPlayer(PlayerType.Stickman);
+        Stickman.gameObject.SetActive(true);
+        UIManager.Instance.PanelEnabled(false);
+
+    }
+
 }
