@@ -116,17 +116,26 @@ public class AircraftMovement : MonoBehaviour
     }
     void Fly()
     {
-        if(playerController.currentPlayer == PlayerType.Aircraft)
-            transform.DOMove(AirPosition.position, 1f).SetEase(Ease.Linear).OnComplete(() => ActivateMovement());
-            
+        if (playerController.currentPlayer != PlayerType.Aircraft) return;
+        //    transform.DOMove(AirPosition.position, 1f).SetEase(Ease.Linear).OnComplete(() => ActivateMovement());
+        //transform.DORotate(AirPosition.position, 3f, RotateMode.Fast).OnComplete(() =>
+        //{
+        transform.DORotate(transform.forward, 1f, RotateMode.Fast).OnComplete(() =>
+        {
+            transform.DOMove(AirPosition.position, 3f).SetEase(Ease.Linear).OnComplete(() => ActivateMovement());
+
+        });
+
+        
     }
-    
+
 
     public float RotationSpeed = 2;
     public float Speed = 30;
     private void Update()
     {
-        if (playerController.currentPlayer != PlayerType.Aircraft) {
+        if (playerController.currentPlayer != PlayerType.Aircraft)
+        {
 
             animator.SetTrigger("Stop");
             return;
@@ -144,15 +153,20 @@ public class AircraftMovement : MonoBehaviour
 
         if (movementVector.magnitude != 0)
         {
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(movementVector , Vector3.up), Time.deltaTime * RotationSpeed);
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(movementVector, Vector3.up), Time.deltaTime * RotationSpeed);
         }
     }
     public void Land()
     {
-        //playerController.SwitchPlayer(PlayerType.Aircraft);
-        transform.DOMove(LandingPosition.position, 1f).SetEase(Ease.Linear).OnComplete(() => 
-        { 
-            playerController.SwitchPlayer(PlayerType.Stickman);
+        //transform.DOMove(LandingPosition.position, 1f).SetEase(Ease.Linear).OnComplete(() => 
+        //{
+        //    transform.DORotate(Vector3.forward, 1f, RotateMode.Fast);
+        //    playerController.SwitchPlayer(PlayerType.Stickman);
+        //});
+        transform.DORotate(-Vector3.forward, 3f, RotateMode.Fast).OnComplete(() =>
+        {
+            transform.DOMove(LandingPosition.position, 3f).SetEase(Ease.Linear).OnComplete(() =>
+                playerController.SwitchPlayer(PlayerType.Stickman));
         });
     }
     private void OnDisable()

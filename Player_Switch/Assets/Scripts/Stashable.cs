@@ -8,7 +8,8 @@ public class Stashable : MonoBehaviour
     public void CollectStashable(Transform stashParent, Vector3 target)
     {
        // var targetPos = stashParent.position + Vector3.up * pos;
-            transform.localPosition = target;
+            //transform.localPosition = target;
+
         transform.parent = stashParent;
         transform.DOLocalJump(target, 1, 1, 1).SetSpeedBased(true).OnComplete(() => {
             transform.localRotation = Quaternion.identity;

@@ -42,6 +42,7 @@ public class ResourceController : MonoBehaviour
                 var resource = Instantiate(collectablePrefab, pos, Quaternion.identity, this.transform);
                 resource.transform.localScale = Vector3.zero;
                 AllCollectables.Add(resource);
+                
             }
         }
     }
@@ -50,6 +51,7 @@ public class ResourceController : MonoBehaviour
         if (AllCollectables.Count == 0) return;
         var i = Random.Range(0, AllCollectables.Count);
         var collectable = AllCollectables[i];
+        SpawnedCollectables.Add(collectable);
         collectable.transform.DOScale(1f, .5f).SetEase(Ease.OutBack, 2.5f);
         AllCollectables.RemoveAt(i);
         collectable.transform.DORotate(Vector3.up * 360f, 5f, RotateMode.LocalAxisAdd).SetLoops(-1);
