@@ -52,7 +52,7 @@ public class YachtMovement : MonoBehaviour
     //            direction.y, transform.rotation.y, direction.x, transform.rotation.w), Time.deltaTime*smooothness);
     //}
     #endregion
-    private float rotSpeedX = 20.0f;
+    public float rotSpeedX = 20.0f;
     private float rotSpeedY = 1.5f;
     float baseSpeed = 30f;
     Player player;
@@ -87,8 +87,13 @@ public class YachtMovement : MonoBehaviour
 
         //}
         Vector3 lookDirection = new Vector3(_joystick.Direction.x, 0, _joystick.Direction.y);
-        Quaternion lookRotation = Quaternion.LookRotation(lookDirection, Vector3.up);
-        transform.rotation = Quaternion.Lerp(transform.rotation, lookRotation, 30 * Time.deltaTime);
+        //Quaternion lookRotation = Quaternion.LookRotation(lookDirection, Vector3.up);
+        //transform.rotation = Quaternion.Lerp(transform.rotation * lookDirection, Vector3.up), lookRotation, 30 * Time.deltaTime);
+        if (lookDirection.magnitude != 0)
+        {
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(transform.rotation * lookDirection, Vector3.up), Time.deltaTime * rotSpeedX);
+        }
+
         Move(moveVector * Time.deltaTime);
     }
     private void Move(Vector3 move)

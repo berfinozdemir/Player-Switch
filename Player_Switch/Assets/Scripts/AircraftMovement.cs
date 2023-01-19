@@ -148,21 +148,18 @@ public class AircraftMovement : MonoBehaviour
 
 
         movementVector = movementVector * Time.deltaTime * Speed;
+        float isMoving = (Input.GetMouseButton(0) == true) || Input.touchCount != 0 ? 1 : 0;
 
-        transform.position += movementVector;
+        transform.position += transform.forward * Time.deltaTime * Speed * isMoving;
 
         if (movementVector.magnitude != 0)
         {
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(movementVector, Vector3.up), Time.deltaTime * RotationSpeed);
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation( transform.rotation * movementVector, Vector3.up), Time.deltaTime * RotationSpeed);
         }
     }
     public void Land()
     {
-        //transform.DOMove(LandingPosition.position, 1f).SetEase(Ease.Linear).OnComplete(() => 
-        //{
-        //    transform.DORotate(Vector3.forward, 1f, RotateMode.Fast);
-        //    playerController.SwitchPlayer(PlayerType.Stickman);
-        //});
+        
         transform.DORotate(-Vector3.forward, 3f, RotateMode.Fast).OnComplete(() =>
         {
             transform.DOMove(LandingPosition.position, 3f).SetEase(Ease.Linear).OnComplete(() =>
