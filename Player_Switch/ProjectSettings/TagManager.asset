@@ -12,6 +12,8 @@ TagManager:
   - PlayerSwitchArea
   - Station
   - DrainingArea
+  - DropArea
+  - TakeArea
   layers:
   - Default
   - TransparentFX
