@@ -1036,7 +1036,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   joystick: {fileID: 742584697}
   Speed: 20
-  AnimationSpeed: 2
+  AnimationSpeed: 20
 --- !u!195 &158951381
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1235,7 +1235,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 164169626}
-  m_LocalRotation: {x: 0.22975291, y: 0.000000018722702, z: -0.00000000441983, w: 0.973249}
+  m_LocalRotation: {x: 0.22975291, y: -0.000000018722702, z: 0.00000000441983, w: 0.973249}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1817,6 +1817,8 @@ MonoBehaviour:
   CarPanel: {fileID: 473824021}
   AircraftPanel: {fileID: 344912184}
   YachtPanel: {fileID: 1413898522}
+  AircraftButton: {fileID: 1182840415}
+  YachtButton: {fileID: 1622556070}
 --- !u!4 &289602031
 Transform:
   m_ObjectHideFlags: 0
@@ -2889,7 +2891,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 466687758}
-  m_LocalRotation: {x: 0.22975288, y: -0.000000029005085, z: 0.00000000684717, w: 0.973249}
+  m_LocalRotation: {x: 0.22975294, y: -0.000000012014302, z: 0.0000000028361924, w: 0.973249}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -3900,7 +3902,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &696150850
 Transform:
   m_ObjectHideFlags: 0
@@ -4967,7 +4969,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &892206679
 Transform:
   m_ObjectHideFlags: 0
@@ -5110,7 +5112,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 894756857}
-  m_LocalRotation: {x: 0.19424805, y: -0.000000029234664, z: 0.000000005789044, w: 0.98095244}
+  m_LocalRotation: {x: 0.19424808, y: 6.76218e-17, z: -1.9831679e-16, w: 0.98095244}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -5784,6 +5786,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: AircraftMovement, Assembly-CSharp
         m_MethodName: Land
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1182840413}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -6832,7 +6846,7 @@ MonoBehaviour:
   YAmount: 3
   ZAmount: 3
   Space: 1
-  CollectableParent: {fileID: 0}
+  CollectableParent: {fileID: 1476127154}
   PointList: []
   FirstStashPoint: {fileID: 1877955484}
   CollectedObjects: []
@@ -6967,8 +6981,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1500325673}
-  m_LocalRotation: {x: 0.22048596, y: -0.000000013332234, z: 0.0000000030137381, w: 0.97539014}
-  m_LocalPosition: {x: 0.0000004010015, y: 25.495052, z: -53.511192}
+  m_LocalRotation: {x: 0.21201202, y: 0, z: 0, w: 0.9772671}
+  m_LocalPosition: {x: 33.5, y: 28.909397, z: -63.09368}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -7213,7 +7227,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1511861637}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -114.5, y: 0, z: -18.1}
+  m_LocalPosition: {x: -142.3, y: 0, z: 186}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -7543,6 +7557,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: YachtMovement, Assembly-CSharp
         m_MethodName: Land
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1622556068}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -8872,8 +8898,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1913742118}
-  m_LocalRotation: {x: 0.22975291, y: -0.000000018722702, z: 0.00000000441983, w: 0.973249}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.22975291, y: 0.000000018722702, z: -0.00000000441983, w: 0.973249}
+  m_LocalPosition: {x: 0, y: 0, z: 0.0000076293945}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1825154959}

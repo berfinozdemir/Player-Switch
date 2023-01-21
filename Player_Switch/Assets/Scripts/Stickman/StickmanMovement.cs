@@ -31,7 +31,7 @@ public class StickmanMovement : MonoBehaviour
             _animationController.PlayIdle();
         else
         {
-            _animationController.PlayWalkAnimation(_agent.velocity.magnitude * AnimationSpeed);
+            _animationController.PlayWalkAnimation(_agent.velocity.magnitude * AnimationSpeed * Time.deltaTime);
 
             Vector3 lookDirection = new Vector3(joystick.Direction.x, 0, joystick.Direction.y);
             Quaternion lookRotation = Quaternion.LookRotation(lookDirection, Vector3.up);
