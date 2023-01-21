@@ -25,7 +25,6 @@ public class Player : MonoBehaviour
     public void ActivateMovement()
     {
         isCurrentPlayer = true;
-        rb.isKinematic = false;
         UIManager.Instance.PanelEnabled(playerData.playerType, true);
     }
     public void DeactivateMovement()

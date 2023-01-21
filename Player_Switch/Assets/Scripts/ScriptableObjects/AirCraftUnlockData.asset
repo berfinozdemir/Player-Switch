@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: AirCraftUnlockData
   m_EditorClassIdentifier: 
   unlockableName: AIRCRAFT
-  price: 2
+  price: 200

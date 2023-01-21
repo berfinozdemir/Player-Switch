@@ -13,34 +13,66 @@ public class DropArea : MonoBehaviour
     public Stashable StashablePrefab;
     public Collectable CollectablePrefab;
     public Action AllResourcesTaken;
-    private void Update()
+
+    public List<Collectable> collectables;
+    public LocomotiveMovement LocomotiveMovement;
+
+    private void Start()
     {
-        if (CollectedResourceCount == 0)
-            AllResourcesTaken?.Invoke();
+        CreateResourcePositions();
     }
     public void Drain(Stashable stashable)
     {
-        CollectedResourceCount++;
 
-        stashable.DrainStashable(FirstPos);
-        var collectable = Instantiate(CollectablePrefab, transform);
-        
-        collectable.transform.DOJump(FirstPos.position, 3, 1, 1).SetSpeedBased(true);//.OnComplete(()=> Destroy(collectable.gameObject));
-        CollectedResourceCount++;
-        
+        //stashable.DrainStashable(FirstPos);
+        //var collectable = Instantiate(CollectablePrefab, transform);
+
+        //collectable.transform.DOJump(FirstPos.position, 3, 1, 1).SetSpeedBased(true);//.OnComplete(()=> Destroy(collectable.gameObject));
+        //CollectedResourceCount++;
     }
-    public Collectable CreateStashable()
+    
+    public int XSize, YSize;
+    public float space;
+    public List<Collectable> drianedCollectables;
+
+    public Transform DrainPoint;
+    public List<Vector3> Positions;
+
+    void CreateResourcePositions()
     {
-        ResourceTaken();
-        return Instantiate(CollectablePrefab, transform);
+        Vector3 pos = Vector3.zero;
+        for (int i = 0; i < XSize; i++)
+        {
+            for (int j = 0; j < YSize; j++)
+            {
+                pos = DrainPoint.position + Vector3.right * space * 1.5f* i + Vector3.forward * j * space;
+
+                Positions.Add(pos);
+            }
+        }
     }
-    public void ResourceTaken()
+
+    int index = 0;
+    public Vector3 GetPos()
     {
-        CollectedResourceCount--;
+        if (index >= Positions.Count)
+        {
+            Debug.LogError("need more available pos");
+            return Vector3.zero;
+        }
+        var newPos = Positions[index];
+
+        index++;
+        return newPos;
     }
-    public void PaymentCompleted()
+    public void RemoveList(Collectable collectable)
     {
-       
+        collectables.Remove(collectable);
+        if (collectables.Count == 0)
+        {
+            LocomotiveMovement.BeginMove();
+            
+        }
+        index--;
     }
-   
 }

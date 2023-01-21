@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: TrainUnlockData
   m_EditorClassIdentifier: 
   unlockableName: TRAIN
-  price: 3
+  price: 50

@@ -8,6 +8,8 @@ public class Payer : MonoBehaviour
     private Stash _stash;
     private float nextTimeToPay = 0;
     private float paymentDelay = 0.1f;
+
+    //public DropArea dropArea;
     private void Awake()
     {
         _stash = GetComponent<Stash>();
@@ -45,18 +47,18 @@ public class Payer : MonoBehaviour
                 StartPayment(unlockable);
             }
         }
-        if (other.CompareTag("DropArea"))
-        {
-            if (Time.time < nextTimeToPay)
-                return;
+        //if (other.CompareTag("DropArea"))
+        //{
+        //    if (Time.time < nextTimeToPay)
+        //        return;
 
-            nextTimeToPay = Time.time + paymentDelay;
+        //    nextTimeToPay = Time.time + paymentDelay;
 
-            if (other.TryGetComponent(out DropArea unlockable))
-            {
-                StartDrop(unlockable);
-            }
-        }
+        //    if (other.TryGetComponent(out DropArea unlockable))
+        //    {
+        //        StartDrop(unlockable);
+        //    }
+        //}
     }
 
     private void StartPayment(UnlockArea unlockable)
@@ -64,22 +66,21 @@ public class Payer : MonoBehaviour
         if (unlockable.unlockableData.RemainingPrice <= 0)
             return;
 
-        var stashable = _stash.RemoveStash();
+        var stashable = _stash.RemovedStashable();
         if (stashable == null)
             return;
 
         unlockable.Pay(stashable);
     }
-    private void StartDrop(DropArea dropArea)
-    {
-        //if ( _stash. <=0)
-        //    return; 
+    //public void Drop()
+    //{
+    //    //if ( _stash. <=0)
+    //    //    return; 
+    //    var stashable = _stash.RemovedStashable();
+    //    if (stashable == null)
+    //        return;
 
-        var stashable = _stash.RemoveStash();
-        if (stashable == null)
-            return;
-
-        dropArea.Drain(stashable);
-    }
+    //    dropArea.Drain(stashable);
+    //}
 
 }

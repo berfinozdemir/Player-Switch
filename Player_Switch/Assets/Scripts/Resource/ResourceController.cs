@@ -9,7 +9,6 @@ public class ResourceController : MonoBehaviour
     public List<Collectable> SpawnedCollectables;
     public List<Collectable> AllCollectables;
     public int MaxSpawnCount = 10;
-    public float SpawnRadius = 10f;
     public float SpawnPeriod = 2f;
     private float nextSpawnTime = 0;
     private void Start()
@@ -52,9 +51,10 @@ public class ResourceController : MonoBehaviour
         var i = Random.Range(0, AllCollectables.Count);
         var collectable = AllCollectables[i];
         SpawnedCollectables.Add(collectable);
-        collectable.transform.DOScale(1f, .5f).SetEase(Ease.OutBack, 2.5f);
+        collectable.InitializeScaling();
+        //collectable.transform.DOScale(1f, .5f).SetEase(Ease.OutBack, 2.5f).OnComplete(col);
+        //collectable.transform.DORotate(Vector3.up * 360f, 5f, RotateMode.LocalAxisAdd).SetLoops(-1);
         AllCollectables.RemoveAt(i);
-        collectable.transform.DORotate(Vector3.up * 360f, 5f, RotateMode.LocalAxisAdd).SetLoops(-1);
     }
 
     

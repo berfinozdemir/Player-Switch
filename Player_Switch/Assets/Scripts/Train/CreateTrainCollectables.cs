@@ -5,23 +5,30 @@ using DG.Tweening;
 
 public class CreateTrainCollectables : MonoBehaviour
 {
-    public List<Transform> transforms;
+    public List<Transform> SpawnPointList;
     public Collectable collectablePrefab;
-    public List<Collectable> Collectables;
+  //  public List<Collectable> Collectables;
 
+    public int SpawnAmount;
     private void Start()
     {
-        SpawnCollectables();
+        //SpawnCollectables();
 
     }
-    void SpawnCollectables()
+    public void SpawnCollectables()
     {
-        foreach (var item in transforms)
+        for (int i = 0; i < SpawnAmount; i++)
         {
-            var resource = Instantiate(collectablePrefab, item.position, Quaternion.identity, this.transform);
-            Collectables.Add(resource);
+            if (i % 2 != 0)
+            {
+                continue;
+            }
+            var resource = Instantiate(collectablePrefab,SpawnPointList[i].position, Quaternion.identity, this.transform);
+            //Collectables.Add(resource);
+            resource.InitializeScaling();
             resource.transform.DORotate(Vector3.up * 360f, 5f, RotateMode.LocalAxisAdd).SetLoops(-1);
-            Debug.Log("col");
         }
+        
     }
+    
 }

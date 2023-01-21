@@ -9,21 +9,22 @@ public class Stash : MonoBehaviour
     public int YAmount;
     public int ZAmount;
     public float Space;
-
+    public Transform CollectableParent;
+    public List<Transform> PointList;
     public Transform FirstStashPoint;
-    public Transform test;
 
     public List<Stashable> CollectedObjects;
-    private void Start()
+    private void Awake()
     {
-        CreateStashPositions();
+        CreateStashPoints();
         //foreach (var item in StashPositions)
         //{
         //    var ball = Instantiate(test, item, Quaternion.identity);
         //    ball.transform.SetParent(this.transform);
         //}
     }
-    void CreateStashPositions()
+    
+    void CreateStashPoints()
     {
         Vector3 pos = Vector3.zero;
         for (int i = 0; i < XAmount; i++)
@@ -32,8 +33,13 @@ public class Stash : MonoBehaviour
             {
                 for (int k = 0; k < ZAmount; k++)
                 {
-                    pos = FirstStashPoint.localPosition + Vector3.right * Space * i + Vector3.forward * k * Space + Vector3.up * Space * j;
-                    StashPositions.Add(pos);
+                    var point = new GameObject("point_" + (i + j + k).ToString()).transform;
+                    point.position = FirstStashPoint.position + Vector3.right * Space*1.5f * i + Vector3.forward * k * Space + Vector3.up * Space * j;
+                    point.SetParent(CollectableParent);
+                    PointList.Add(point);
+
+                    //pos = FirstStashPoint.position + Vector3.right * Space * i + Vector3.forward * k * Space + Vector3.up * Space * j;
+                    //StashPositions.Add(pos);
                     //Instantiate(test, pos, Quaternion.identity, this.transform);
                 }
 
@@ -47,14 +53,21 @@ public class Stash : MonoBehaviour
         index++;
         return newPos;
     }
+
+    Transform GetStashPoint()
+    {
+        var point = PointList[index];
+        index++;
+        return point;
+    }
     public void TakeResource(Collectable collectedObj)
     {
         if (CollectedObjects.Count >= XAmount * YAmount * ZAmount) return;
         var stashable = collectedObj.Collect();
-        stashable.CollectStashable(this.transform,GetStashPos());
+        stashable.CollectStashable(GetStashPoint());
         CollectedObjects.Add(stashable);
     }
-    public Stashable RemoveStash()
+    public Stashable RemovedStashable()
     {
         if (CollectedObjects.Count <= 0)
             return null;

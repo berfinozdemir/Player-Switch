@@ -54,10 +54,11 @@ public class YachtMovement : MonoBehaviour
     #endregion
     public float rotSpeedX = 20.0f;
     private float rotSpeedY = 1.5f;
-    float baseSpeed = 30f;
+    public float baseSpeed = 30f;
     Player player;
     public Transform Marina;
     public PlayerController playerController;
+    public ParticleSystem SeaParticle;
     private void Awake()
     {
         player = GetComponent<Player>();
@@ -68,27 +69,13 @@ public class YachtMovement : MonoBehaviour
         if (!_joystick || !player.isCurrentPlayer) return;
         float isMoving = (Input.GetMouseButton(0) == true) || Input.touchCount != 0 ? 1 : 0;
 
+        
         Vector3 moveVector = transform.forward * baseSpeed * isMoving;
         Vector3 inputs = _joystick.Direction;
 
         Vector3 dir = inputs.x * transform.right * rotSpeedX * Time.deltaTime;
-        //Vector3 pitch = inputs.y * transform.up * rotSpeedY * Time.deltaTime;
-        //Vector3 dir = dir;// + pitch;
-
-        //float maxX = Quaternion.LookRotation(moveVector + dir).eulerAngles.x;
-        //if (maxX < 90 && maxX > 70 || maxX > 270 && maxX < 290) { }
-        //else
-        //{
-        //    moveVector += dir;
-
-        //    Vector3 lookDirection = new Vector3(_joystick.Direction.x, 0, _joystick.Direction.y);
-        //    Quaternion lookRotation = Quaternion.LookRotation(lookDirection, Vector3.up);
-        //    transform.rotation = Quaternion.Lerp(transform.rotation,lookRotation, 30*Time.deltaTime);
-
-        //}
+        
         Vector3 lookDirection = new Vector3(_joystick.Direction.x, 0, _joystick.Direction.y);
-        //Quaternion lookRotation = Quaternion.LookRotation(lookDirection, Vector3.up);
-        //transform.rotation = Quaternion.Lerp(transform.rotation * lookDirection, Vector3.up), lookRotation, 30 * Time.deltaTime);
         if (lookDirection.magnitude != 0)
         {
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(transform.rotation * lookDirection, Vector3.up), Time.deltaTime * rotSpeedX);
@@ -99,13 +86,15 @@ public class YachtMovement : MonoBehaviour
     private void Move(Vector3 move)
     {
         transform.position += move;
+
     }
     public void Land()
     {
-        //playerController.SwitchPlayer(PlayerType.Aircraft);
-        transform.DOMove(Marina.position, 1f).SetEase(Ease.Linear).OnComplete(() =>
+        SeaParticle.Stop();
+        transform.DOMove(Marina.position, 2f).SetEase(Ease.Linear).OnComplete(() =>
         {
-            playerController.SwitchPlayer(PlayerType.Stickman);
+            transform.DORotate(transform.forward, 1f, RotateMode.Fast).OnComplete(() =>
+                playerController.SwitchPlayer(PlayerType.Stickman));
         });
     }
 }

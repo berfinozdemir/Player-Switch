@@ -16,7 +16,10 @@ public class Collector : MonoBehaviour
         {
             if (other.TryGetComponent(out Collectable collected))
                 stash.TakeResource(collected);
+            //else if (other.TryGetComponent(out Stashable stashed))
+            //    stash.TakeResource(collected);
         }
+
         //else if (other.CompareTag("TakeArea"))
         //{
         //    if (other.GetComponentInParent<DropArea>())

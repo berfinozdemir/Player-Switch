@@ -5,60 +5,47 @@ using DG.Tweening;
 
 public class DrainResource : MonoBehaviour
 {
-    private float nextTimeToPay = 0;
-    private float paymentDelay = 0.1f;
-    public int XSize, YSize, space;
-    public List<Collectable> drianedCollectables;
-    public Collectable collectablePrefab;
-    public Transform DrainPoint;
-    public List<Vector3> Positions;
+
+
+    public DropArea dropArea;
+    public Stash stash;
     private void Start()
     {
-        CreateResourcePositions();
+        //CreateResourcePositions();
+        stash = GetComponent<Stash>();
     }
-    private void OnTriggerEnter(Collider other)
+
+    public void DrainResources()
     {
-        if (other.CompareTag("Station"))
+        StartCoroutine(DrainRoutine());
+
+    }
+
+    private void SpawnCollectable(Vector3 pos)
+    {
+        var collectable = Instantiate(dropArea.CollectablePrefab);
+        collectable.InitializeDirect();
+        collectable.transform.position = pos;
+        collectable.transform.eulerAngles = Vector3.forward * 50f;
+        collectable.DropArea = dropArea;
+        dropArea.collectables.Add(collectable);
+       
+    }
+    IEnumerator DrainRoutine()
+    {
+        for (int i = stash.CollectedObjects.Count - 1; i >= 0; i--)
         {
-            StartDrain();
-        }
-    }
-    void StartDrain()
-    {
-        while(drianedCollectables.Count < Positions.Count)
-        {
-            CreateResource();
-        }
-    }
-    void CreateResource()
-    {
-        var col = Instantiate(collectablePrefab, transform.position, Quaternion.identity, DrainPoint);
-        col.transform.DOJump(GetPos(), 1, 1, 1).SetSpeedBased(true).OnComplete(() => {
-            transform.localRotation = Quaternion.identity;
-        });
-        drianedCollectables.Add(col);
-        nextTimeToPay = Time.time + paymentDelay;
-    }
-    void CreateResourcePositions()
-    {
-        Vector3 pos = Vector3.zero;
-        for (int i = 0; i < XSize; i++)
-        {
-            for (int j = 0; j < YSize; j++)
+            yield return new WaitForSeconds(.2f);
+            var stashable = stash.RemovedStashable();
+            var pos = dropArea.GetPos();
+            stashable.transform.DOJump(pos, 3, 1, .5f).OnComplete(() =>
             {
-                pos = DrainPoint.position + Vector3.right * space * i + Vector3.forward * j * space;
+                SpawnCollectable(pos);
 
-                Positions.Add(pos);
-            }
+                stashable.gameObject.SetActive(false);
+            });
         }
-    }
-    int index = 0;
-    Vector3 GetPos()
-    {
-        var newPos = Positions[index];
-        index++;
-        return newPos;
-    }
 
+    }
 
 }

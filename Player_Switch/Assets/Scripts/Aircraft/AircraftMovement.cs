@@ -120,7 +120,7 @@ public class AircraftMovement : MonoBehaviour
         //    transform.DOMove(AirPosition.position, 1f).SetEase(Ease.Linear).OnComplete(() => ActivateMovement());
         //transform.DORotate(AirPosition.position, 3f, RotateMode.Fast).OnComplete(() =>
         //{
-        transform.DORotate(transform.forward, 1f, RotateMode.Fast).OnComplete(() =>
+        transform.DORotate(transform.forward, 1f, RotateMode.Fast).SetSpeedBased(true).OnComplete(() =>
         {
             transform.DOMove(AirPosition.position, 3f).SetEase(Ease.Linear).OnComplete(() => ActivateMovement());
 

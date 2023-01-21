@@ -12,6 +12,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7621321238879636725, guid: 9d886fa0e351be94faa64751e1ef4d2b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7621321238879636725, guid: 9d886fa0e351be94faa64751e1ef4d2b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7621321238879636725, guid: 9d886fa0e351be94faa64751e1ef4d2b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7621321238879636725, guid: 9d886fa0e351be94faa64751e1ef4d2b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -54,6 +66,18 @@ PrefabInstance:
     - target: {fileID: 7621321238879636726, guid: 9d886fa0e351be94faa64751e1ef4d2b, type: 3}
       propertyPath: m_Name
       value: AirCollectableMetal Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 7948543506373108393, guid: 9d886fa0e351be94faa64751e1ef4d2b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7948543506373108393, guid: 9d886fa0e351be94faa64751e1ef4d2b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7948543506373108393, guid: 9d886fa0e351be94faa64751e1ef4d2b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8139585069041082616, guid: 9d886fa0e351be94faa64751e1ef4d2b, type: 3}
       propertyPath: m_Size.x
