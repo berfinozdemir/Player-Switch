@@ -2,11 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-//public enum CollectionType
-//{
-//    FreeArea,
-//    DropArea
-//}
 
 public class Collectable : MonoBehaviour
 {
@@ -26,7 +21,6 @@ public class Collectable : MonoBehaviour
         if (DropArea)
         {
             DropArea.RemoveList(this);
-            //remove list.
         }
         
 

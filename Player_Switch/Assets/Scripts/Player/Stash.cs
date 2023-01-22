@@ -17,11 +17,7 @@ public class Stash : MonoBehaviour
     private void Awake()
     {
         CreateStashPoints();
-        //foreach (var item in StashPositions)
-        //{
-        //    var ball = Instantiate(test, item, Quaternion.identity);
-        //    ball.transform.SetParent(this.transform);
-        //}
+
     }
     
     void CreateStashPoints()

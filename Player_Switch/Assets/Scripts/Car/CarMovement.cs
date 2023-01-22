@@ -33,7 +33,9 @@ public class CarMovement : MonoBehaviour
     }
     private void Update()
     {
-        if (!joystick || !player.isCurrentPlayer ) return;
+
+
+        if (!joystick || !player.isCurrentPlayer) return;
         float isMoving = (Input.GetMouseButton(0) == true) || Input.touchCount != 0 ? 1 : 0;
 
 
@@ -65,18 +67,23 @@ public class CarMovement : MonoBehaviour
     void Move(Vector3 move, float steering)
     {
         transform.position += move;
+
+      
         foreach (AxleInfo axleInfo in axleInfos)
         {
+
             if (axleInfo.steering)
             {
                 axleInfo.leftWheel.steerAngle = steering;
                 axleInfo.rightWheel.steerAngle = steering;
             }
+
+
             ApplyLocalPositionToVisuals(axleInfo.leftWheel, axleInfo.leftWheelTransform);
             ApplyLocalPositionToVisuals(axleInfo.rightWheel, axleInfo.rightWheelTransform);
 
-            axleInfo.leftWheelTransform.Rotate(Vector3.right,500*Time.deltaTime);
-            axleInfo.rightWheelTransform.Rotate(Vector3.right,5);
+            axleInfo.leftWheelTransform.Rotate(Vector3.right * 90 * Time.deltaTime);
+            axleInfo.rightWheelTransform.Rotate(Vector3.right * 150 * Time.deltaTime);
         }
 
     }
